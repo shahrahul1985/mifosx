@@ -90,6 +90,10 @@ public class LoanEnumerations {
                 optionData = new EnumOptionData(PeriodFrequencyType.YEARS.getValue().longValue(), codePrefix
                         + PeriodFrequencyType.YEARS.getCode(), "Years");
             break;
+            case ENDOFMONTH:
+                optionData = new EnumOptionData(PeriodFrequencyType.ENDOFMONTH.getValue().longValue(), codePrefix
+                        + PeriodFrequencyType.ENDOFMONTH.getCode(), "EndOfMonth");
+            break;
             default:
                 optionData = new EnumOptionData(PeriodFrequencyType.INVALID.getValue().longValue(), PeriodFrequencyType.INVALID.getCode(),
                         "Invalid");
@@ -117,6 +121,10 @@ public class LoanEnumerations {
             case MONTHS:
                 optionData = new EnumOptionData(PeriodFrequencyType.MONTHS.getValue().longValue(), codePrefix
                         + PeriodFrequencyType.MONTHS.getCode(), "Months");
+            break;
+            case ENDOFMONTH:
+                optionData = new EnumOptionData(PeriodFrequencyType.ENDOFMONTH.getValue().longValue(), codePrefix
+                        + PeriodFrequencyType.ENDOFMONTH.getCode(), "EndOfMonth");
             break;
             default:
                 optionData = new EnumOptionData(PeriodFrequencyType.INVALID.getValue().longValue(), PeriodFrequencyType.INVALID.getCode(),
@@ -191,6 +199,10 @@ public class LoanEnumerations {
                 optionData = new EnumOptionData(PeriodFrequencyType.MONTHS.getValue().longValue(), codePrefix
                         + PeriodFrequencyType.MONTHS.getCode(), "Months");
             break;
+            case ENDOFMONTH:
+                optionData = new EnumOptionData(PeriodFrequencyType.ENDOFMONTH.getValue().longValue(), codePrefix
+                        + PeriodFrequencyType.ENDOFMONTH.getCode(), "EndOfMonth");
+            break;
             default:
                 optionData = new EnumOptionData(PeriodFrequencyType.INVALID.getValue().longValue(), PeriodFrequencyType.INVALID.getCode(),
                         "Invalid");
@@ -214,6 +226,10 @@ public class LoanEnumerations {
             case YEARS:
                 optionData = new EnumOptionData(PeriodFrequencyType.YEARS.getValue().longValue(), codePrefix
                         + PeriodFrequencyType.YEARS.getCode(), "Per year");
+            break;
+            case ENDOFMONTH:
+                optionData = new EnumOptionData(PeriodFrequencyType.ENDOFMONTH.getValue().longValue(), codePrefix
+                        + PeriodFrequencyType.ENDOFMONTH.getCode(), "Per month");
             break;
             default:
                 optionData = new EnumOptionData(PeriodFrequencyType.INVALID.getValue().longValue(), PeriodFrequencyType.INVALID.getCode(),
@@ -587,6 +603,10 @@ public class LoanEnumerations {
             case WEEKLY:
                 optionData = new EnumOptionData(RecalculationFrequencyType.WEEKLY.getValue().longValue(),
                         RecalculationFrequencyType.WEEKLY.getCode(), "Weekly");
+            break;
+            case ENDOFMONTH:
+                optionData = new EnumOptionData(RecalculationFrequencyType.ENDOFMONTH.getValue().longValue(),
+                        RecalculationFrequencyType.ENDOFMONTH.getCode(), "EndOfMonth");
             break;
             default:
                 optionData = new EnumOptionData(RecalculationFrequencyType.INVALID.getValue().longValue(),

@@ -14,7 +14,8 @@ public enum PeriodFrequencyType {
     WEEKS(1, "periodFrequencyType.weeks"), //
     MONTHS(2, "periodFrequencyType.months"), //
     YEARS(3, "periodFrequencyType.years"), //
-    INVALID(4, "periodFrequencyType.invalid");
+    ENDOFMONTH(4, "periodFrequencyType.endOfMonth"),
+    INVALID(5, "periodFrequencyType.invalid");
 
     private final Integer value;
     private final String code;
@@ -48,6 +49,9 @@ public enum PeriodFrequencyType {
                 case 3:
                     repaymentFrequencyType = PeriodFrequencyType.YEARS;
                 break;
+                case 4:
+                    repaymentFrequencyType = PeriodFrequencyType.ENDOFMONTH;
+                break;
             }
         }
         return repaymentFrequencyType;
@@ -71,6 +75,10 @@ public enum PeriodFrequencyType {
     
     public boolean isInvalid() {
         return this.value.equals(PeriodFrequencyType.INVALID.getValue());
+    }
+    
+    public boolean isEndOfMonth() {
+        return this.value.equals(PeriodFrequencyType.ENDOFMONTH.getValue());
     }
     
     public static Object[] integerValues() {

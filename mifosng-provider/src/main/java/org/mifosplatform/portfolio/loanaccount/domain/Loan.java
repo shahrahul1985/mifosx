@@ -4057,6 +4057,9 @@ public class Loan extends AbstractPersistable<Long> {
             case MONTHS:
                 dueRepaymentPeriodDate = startDate.plusMonths(repaidEvery);
             break;
+            case ENDOFMONTH:
+                dueRepaymentPeriodDate = startDate.plusMonths(repaidEvery).dayOfMonth().withMaximumValue();
+            break;
             case YEARS:
                 dueRepaymentPeriodDate = startDate.plusYears(repaidEvery);
             break;

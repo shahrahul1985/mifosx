@@ -706,6 +706,7 @@ public final class LoanApplicationTerms {
                     case WEEKS:
                         periodicInterestRate = oneDayOfYearInterestRate.multiply(BigDecimal.valueOf(numberOfDaysInPeriod), mc);
                     break;
+                    case ENDOFMONTH:
                     case MONTHS:
                         if (daysInMonthType.isDaysInMonth_30()) {
                             numberOfDaysInPeriod = this.repaymentEvery * 30;
@@ -1078,6 +1079,7 @@ public final class LoanApplicationTerms {
                     int days = Days.daysBetween(fromDate, toDate).getDays();
                     isSameAsRepaymentPeriod = (days % 7) == 0;
                 break;
+                case ENDOFMONTH:
                 case MONTHS:
                     boolean isFromDateOnEndDate = false;
                     if (fromDate.getDayOfMonth() > fromDate.plusDays(1).getDayOfMonth()) {
@@ -1118,6 +1120,7 @@ public final class LoanApplicationTerms {
                 difference = new Period(fromDate, toDate, periodType);
                 numberOfPeriods = difference.getWeeks();
             break;
+            case ENDOFMONTH:
             case MONTHS:
                 numberOfPeriods = difference.getMonths();
             break;
