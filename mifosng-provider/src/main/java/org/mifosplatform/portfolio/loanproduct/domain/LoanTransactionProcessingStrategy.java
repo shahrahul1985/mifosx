@@ -57,4 +57,5 @@ public class LoanTransactionProcessingStrategy extends AbstractPersistable<Long>
     public boolean isInterestPrincipalPenaltiesFeesOrderStrategy() {
         return "interest-principal-penalties-fees-order-strategy".equalsIgnoreCase(this.code);
     }
-}
+    
+ }

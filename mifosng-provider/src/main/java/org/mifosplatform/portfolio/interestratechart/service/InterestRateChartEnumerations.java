@@ -40,6 +40,10 @@ public class InterestRateChartEnumerations {
                 optionData = new EnumOptionData(PeriodFrequencyType.YEARS.getValue().longValue(),
                         PeriodFrequencyType.YEARS.getCode(), "Years");
             break;
+            case ENDOFMONTH:
+                optionData = new EnumOptionData(PeriodFrequencyType.ENDOFMONTH.getValue().longValue(),
+                        PeriodFrequencyType.ENDOFMONTH.getCode(), "EndOfMonth");
+            break;
         }
 
         return optionData;

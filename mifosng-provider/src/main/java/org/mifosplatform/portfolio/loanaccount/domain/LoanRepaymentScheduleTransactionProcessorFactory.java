@@ -53,6 +53,7 @@ public class LoanRepaymentScheduleTransactionProcessorFactory {
             if (transactionProcessingStrategy.isInterestPrincipalPenaltiesFeesOrderStrategy()) {
                 processor = new InterestPrincipalPenaltyFeesOrderLoanRepaymentScheduleTransactionProcessor();
             }
+           
         }
 
         return processor;

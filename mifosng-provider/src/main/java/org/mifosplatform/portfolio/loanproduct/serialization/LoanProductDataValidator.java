@@ -212,7 +212,7 @@ public final class LoanProductDataValidator {
 
         final Integer repaymentFrequencyType = this.fromApiJsonHelper.extractIntegerNamed("repaymentFrequencyType", element,
                 Locale.getDefault());
-        baseDataValidator.reset().parameter("repaymentFrequencyType").value(repaymentFrequencyType).notNull().inMinMaxRange(0, 3);
+        baseDataValidator.reset().parameter("repaymentFrequencyType").value(repaymentFrequencyType).notNull().inMinMaxRange(0, 4);
 
         final BigDecimal interestRatePerPeriod = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("interestRatePerPeriod", element);
         baseDataValidator.reset().parameter("interestRatePerPeriod").value(interestRatePerPeriod).notNull().zeroOrPositiveAmount();
@@ -556,7 +556,7 @@ public final class LoanProductDataValidator {
             final Integer recalculationRestFrequencyType = this.fromApiJsonHelper.extractIntegerNamed(
                     LoanProductConstants.recalculationRestFrequencyTypeParameterName, element, Locale.getDefault());
             baseDataValidator.reset().parameter(LoanProductConstants.recalculationRestFrequencyTypeParameterName)
-                    .value(recalculationRestFrequencyType).notNull().inMinMaxRange(1, 4);
+                    .value(recalculationRestFrequencyType).notNull().inMinMaxRange(1, 5);
             if (recalculationRestFrequencyType != null) {
                 frequencyType = RecalculationFrequencyType.fromInt(recalculationRestFrequencyType);
             }
@@ -597,7 +597,7 @@ public final class LoanProductDataValidator {
                 final Integer recalculationCompoundingFrequencyType = this.fromApiJsonHelper.extractIntegerNamed(
                         LoanProductConstants.recalculationCompoundingFrequencyTypeParameterName, element, Locale.getDefault());
                 baseDataValidator.reset().parameter(LoanProductConstants.recalculationCompoundingFrequencyTypeParameterName)
-                        .value(recalculationCompoundingFrequencyType).notNull().inMinMaxRange(1, 4);
+                        .value(recalculationCompoundingFrequencyType).notNull().inMinMaxRange(1, 5);
                 if (recalculationCompoundingFrequencyType != null) {
                     compoundingfrequencyType = RecalculationFrequencyType.fromInt(recalculationCompoundingFrequencyType);
                     if (!compoundingfrequencyType.isSameAsRepayment()) {
@@ -799,7 +799,7 @@ public final class LoanProductDataValidator {
         if (this.fromApiJsonHelper.parameterExists("repaymentFrequencyType", element)) {
             final Integer repaymentFrequencyType = this.fromApiJsonHelper.extractIntegerNamed("repaymentFrequencyType", element,
                     Locale.getDefault());
-            baseDataValidator.reset().parameter("repaymentFrequencyType").value(repaymentFrequencyType).notNull().inMinMaxRange(0, 3);
+            baseDataValidator.reset().parameter("repaymentFrequencyType").value(repaymentFrequencyType).notNull().inMinMaxRange(0, 4);
         }
 
         if (this.fromApiJsonHelper.parameterExists("transactionProcessingStrategyId", element)) {

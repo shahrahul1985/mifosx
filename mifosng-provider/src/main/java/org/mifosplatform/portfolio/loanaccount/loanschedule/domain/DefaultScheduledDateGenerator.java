@@ -120,6 +120,12 @@ public class DefaultScheduledDateGenerator implements ScheduledDateGenerator {
                     dueRepaymentPeriodDate = adjustToNthWeekDay(dueRepaymentPeriodDate, nthDay, dayOfWeek.getValue());
                 }
             break;
+            case ENDOFMONTH:
+                dueRepaymentPeriodDate = startDate.plusMonths(repaidEvery).dayOfMonth().withMaximumValue();
+                if (!(nthDay == null || dayOfWeek == null || dayOfWeek == DayOfWeekType.INVALID)) {
+                    dueRepaymentPeriodDate = adjustToNthWeekDay(dueRepaymentPeriodDate, nthDay, dayOfWeek.getValue());
+                }
+            break;
             case YEARS:
                 dueRepaymentPeriodDate = startDate.plusYears(repaidEvery);
             break;
@@ -169,6 +175,14 @@ public class DefaultScheduledDateGenerator implements ScheduledDateGenerator {
                     isScheduledDate = modifiedDate.isEqual(date);
                 }
             break;
+            case ENDOFMONTH:
+                int monthDiff1 = Months.monthsBetween(startDate, date).getMonths();
+                isScheduledDate = (monthDiff1 % repaidEvery) == 0;
+                if (isScheduledDate) {
+                    LocalDate modifiedDate = startDate.plusMonths(monthDiff1).dayOfMonth().withMaximumValue();
+                    isScheduledDate = modifiedDate.isEqual(date);
+                }
+            break;
             case YEARS:
                 int yearDiff = Years.yearsBetween(startDate, date).getYears();
                 isScheduledDate = (yearDiff % repaidEvery) == 0;
@@ -198,6 +212,9 @@ public class DefaultScheduledDateGenerator implements ScheduledDateGenerator {
             break;
             case MONTHS:
                 idealDisbursementDate = firstRepaymentDate.minusMonths(repaidEvery);
+            break;
+            case ENDOFMONTH:
+                idealDisbursementDate = firstRepaymentDate.minusMonths(repaidEvery).dayOfMonth().withMaximumValue();
             break;
             case YEARS:
                 idealDisbursementDate = firstRepaymentDate.minusYears(repaidEvery);

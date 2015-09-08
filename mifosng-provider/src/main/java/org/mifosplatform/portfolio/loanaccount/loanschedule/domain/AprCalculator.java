@@ -22,6 +22,7 @@ public class AprCalculator {
             case WEEKS:
                 defaultAnnualNominalInterestRate = interestRatePerPeriod.multiply(BigDecimal.valueOf(52));
             break;
+            case ENDOFMONTH:
             case MONTHS:
                 defaultAnnualNominalInterestRate = interestRatePerPeriod.multiply(BigDecimal.valueOf(12));
             break;
