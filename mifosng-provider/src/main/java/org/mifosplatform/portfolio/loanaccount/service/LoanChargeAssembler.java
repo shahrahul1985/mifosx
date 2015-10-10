@@ -136,9 +136,11 @@ public class LoanChargeAssembler {
                         }
                         if (topLevelJsonElement.has("disbursementData") && topLevelJsonElement.get("disbursementData").isJsonArray()) {
                             final JsonArray disbursementArray = topLevelJsonElement.get("disbursementData").getAsJsonArray();
+                            if(disbursementArray.size() >0){
                             JsonObject disbursementDataElement = disbursementArray.get(0).getAsJsonObject();
                             expectedDisbursementDate = this.fromApiJsonHelper.extractLocalDateNamed(
                                     LoanApiConstants.disbursementDateParameterName, disbursementDataElement, dateFormat, locale);
+                            }
                         }
 
                         if ((chargeDefinition.isPercentageOfDisbursementAmount() || chargeDefinition.isPercentageOfApprovedAmount() || chargeDefinition
