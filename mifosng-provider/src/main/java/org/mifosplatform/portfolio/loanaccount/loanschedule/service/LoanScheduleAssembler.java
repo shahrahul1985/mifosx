@@ -227,6 +227,7 @@ public class LoanScheduleAssembler {
 
         // grace details
         final Integer graceOnPrincipalPayment = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("graceOnPrincipalPayment", element);
+        final boolean recurringGraceOnPrincipal = this.fromApiJsonHelper.extractBooleanNamed("recurringGraceOnPrincipal", element);
         final Integer graceOnInterestPayment = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("graceOnInterestPayment", element);
         final Integer graceOnInterestCharged = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("graceOnInterestCharged", element);
         final LocalDate interestChargedFromDate = this.fromApiJsonHelper.extractLocalDateNamed("interestChargedFromDate", element);
@@ -300,7 +301,7 @@ public class LoanScheduleAssembler {
                 repaymentEvery, repaymentPeriodFrequencyType, nthDay, weekDayType, amortizationMethod, interestMethod,
                 interestRatePerPeriod, interestRatePeriodFrequencyType, annualNominalInterestRate, interestCalculationPeriodMethod,
                 principalMoney, expectedDisbursementDate, repaymentsStartingFromDate, calculatedRepaymentsStartingFromDate,
-                graceOnPrincipalPayment, graceOnInterestPayment, graceOnInterestCharged, interestChargedFromDate, inArrearsToleranceMoney,
+                graceOnPrincipalPayment, recurringGraceOnPrincipal, graceOnInterestPayment, graceOnInterestCharged, interestChargedFromDate, inArrearsToleranceMoney,
                 loanProduct.isMultiDisburseLoan(), emiAmount, disbursementDatas, maxOutstandingBalance, loanVariationTermsData,
                 graceOnArrearsAgeing, daysInMonthType, daysInYearType, isInterestRecalculationEnabled, recalculationFrequencyType,
                 restCalendarInstance, compoundingCalendarInstance, compoundingFrequencyType, principalThresholdForLastInstalment,

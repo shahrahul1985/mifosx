@@ -57,6 +57,7 @@ public final class LoanApplicationCommandFromApiJsonHelper {
             "expectedDisbursementDate",
             "repaymentsStartingFromDate",
             "graceOnPrincipalPayment",
+            "recurringGraceOnPrincipal",
             "graceOnInterestPayment",
             "graceOnInterestCharged",
             "interestChargedFromDate", //
