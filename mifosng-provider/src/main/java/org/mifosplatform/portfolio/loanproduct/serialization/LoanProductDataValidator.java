@@ -52,7 +52,7 @@ public final class LoanProductDataValidator {
             "currencyCode", "digitsAfterDecimal", "inMultiplesOf", "principal", "minPrincipal", "maxPrincipal", "repaymentEvery",
             "numberOfRepayments", "minNumberOfRepayments", "maxNumberOfRepayments", "repaymentFrequencyType", "interestRatePerPeriod",
             "minInterestRatePerPeriod", "maxInterestRatePerPeriod", "interestRateFrequencyType", "amortizationType", "interestType",
-            "interestCalculationPeriodType", "inArrearsTolerance", "transactionProcessingStrategyId", "graceOnPrincipalPayment",
+            "interestCalculationPeriodType", "inArrearsTolerance", "transactionProcessingStrategyId", "graceOnPrincipalPayment", "recurringGraceOnPrincipal",
             "graceOnInterestPayment", "graceOnInterestCharged", "charges", "accountingRule", "includeInBorrowerCycle", "startDate",
             "closeDate", "externalId", LOAN_PRODUCT_ACCOUNTING_PARAMS.FEES_RECEIVABLE.getValue(),
             LOAN_PRODUCT_ACCOUNTING_PARAMS.FUND_SOURCE.getValue(), LOAN_PRODUCT_ACCOUNTING_PARAMS.INCOME_FROM_FEES.getValue(),

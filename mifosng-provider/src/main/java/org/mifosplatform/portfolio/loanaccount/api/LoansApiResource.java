@@ -110,7 +110,7 @@ public class LoansApiResource {
             "termFrequency", "termPeriodFrequencyType", "numberOfRepayments", "repaymentEvery", "interestRatePerPeriod",
             "annualInterestRate", "repaymentFrequencyType", "transactionProcessingStrategyId", "transactionProcessingStrategyName",
             "interestRateFrequencyType", "amortizationType", "interestType", "interestCalculationPeriodType",
-            "expectedFirstRepaymentOnDate", "graceOnPrincipalPayment", "graceOnInterestPayment", "graceOnInterestCharged",
+            "expectedFirstRepaymentOnDate", "graceOnPrincipalPayment", "recurringGraceOnPrincipal", "graceOnInterestPayment", "graceOnInterestCharged",
             "interestChargedFromDate", "timeline", "totalFeeChargesAtDisbursement", "summary", "repaymentSchedule", "transactions",
             "charges", "collateral", "guarantors", "meeting", "productOptions", "amortizationTypeOptions", "interestTypeOptions",
             "interestCalculationPeriodTypeOptions", "repaymentFrequencyTypeOptions", "repaymentFrequencyNthDayTypeOptions",

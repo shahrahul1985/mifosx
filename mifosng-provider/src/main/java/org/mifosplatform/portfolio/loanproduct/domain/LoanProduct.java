@@ -188,6 +188,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
 
         // grace details
         final Integer graceOnPrincipalPayment = command.integerValueOfParameterNamed("graceOnPrincipalPayment");
+        final boolean recurringGraceOnPrincipal = command.booleanPrimitiveValueOfParameterNamed("recurringGraceOnPrincipal");
         final Integer graceOnInterestPayment = command.integerValueOfParameterNamed("graceOnInterestPayment");
         final Integer graceOnInterestCharged = command.integerValueOfParameterNamed("graceOnInterestCharged");
         final Integer minimumDaysBetweenDisbursalAndFirstRepayment = command
@@ -264,7 +265,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
         return new LoanProduct(fund, loanTransactionProcessingStrategy, name, shortName, description, currency, principal, minPrincipal,
                 maxPrincipal, interestRatePerPeriod, minInterestRatePerPeriod, maxInterestRatePerPeriod, interestFrequencyType,
                 annualInterestRate, interestMethod, interestCalculationPeriodMethod, repaymentEvery, repaymentFrequencyType,
-                numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, graceOnPrincipalPayment, graceOnInterestPayment,
+                numberOfRepayments, minNumberOfRepayments, maxNumberOfRepayments, graceOnPrincipalPayment, recurringGraceOnPrincipal, graceOnInterestPayment,
                 graceOnInterestCharged, amortizationMethod, inArrearsTolerance, productCharges, accountingRuleType, includeInBorrowerCycle,
                 startDate, closeDate, externalId, useBorrowerCycle, loanProductBorrowerCycleVariations, multiDisburseLoan, maxTrancheCount,
                 outstandingLoanBalance, graceOnArrearsAgeing, overdueDaysForNPA, daysInMonthType, daysInYearType,
@@ -485,7 +486,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final Integer repayEvery,
             final PeriodFrequencyType repaymentFrequencyType, final Integer defaultNumberOfInstallments,
             final Integer defaultMinNumberOfInstallments, final Integer defaultMaxNumberOfInstallments,
-            final Integer graceOnPrincipalPayment, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
+            final Integer graceOnPrincipalPayment, final boolean recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
             final AmortizationMethod amortizationMethod, final BigDecimal inArrearsTolerance, final List<Charge> charges,
             final AccountingRuleType accountingRuleType, final boolean includeInBorrowerCycle, final LocalDate startDate,
             final LocalDate closeDate, final String externalId, final boolean useBorrowerCycle,
@@ -514,7 +515,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
 
         this.loanProductRelatedDetail = new LoanProductRelatedDetail(currency, defaultPrincipal, defaultNominalInterestRatePerPeriod,
                 interestPeriodFrequencyType, defaultAnnualNominalInterestRate, interestMethod, interestCalculationPeriodMethod, repayEvery,
-                repaymentFrequencyType, defaultNumberOfInstallments, graceOnPrincipalPayment, graceOnInterestPayment,
+                repaymentFrequencyType, defaultNumberOfInstallments, graceOnPrincipalPayment, recurringGraceOnPrincipal, graceOnInterestPayment,
                 graceOnInterestCharged, amortizationMethod, inArrearsTolerance, graceOnArrearsAgeing, daysInMonthType.getValue(),
                 daysInYearType.getValue(), isInterestRecalculationEnabled);
 

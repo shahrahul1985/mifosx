@@ -81,10 +81,13 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
 
     @Column(name = "grace_on_principal_periods", nullable = true)
     private Integer graceOnPrincipalPayment;
+    
+    @Column(name = "is_grace_on_principal_recurring", nullable = false)
+    private boolean recurringGraceOnPrincipal;
 
     @Column(name = "grace_on_interest_periods", nullable = true)
     private Integer graceOnInterestPayment;
-
+    
     @Column(name = "grace_interest_free_periods", nullable = true)
     private Integer graceOnInterestCharged;
 
@@ -114,13 +117,13 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
             final BigDecimal nominalAnnualInterestRate, final InterestMethod interestMethod,
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final Integer repaymentEvery,
             final PeriodFrequencyType repaymentPeriodFrequencyType, final Integer numberOfRepayments,
-            final Integer graceOnPrincipalPayment, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
+            final Integer graceOnPrincipalPayment, final boolean recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
             final AmortizationMethod amortizationMethod, final BigDecimal inArrearsTolerance, final Integer graceOnArrearsAgeing,
             final Integer daysInMonthType, final Integer daysInYearType, final boolean isInterestRecalculationEnabled) {
 
         return new LoanProductRelatedDetail(currency, principal, nominalInterestRatePerPeriod, interestRatePeriodFrequencyType,
                 nominalAnnualInterestRate, interestMethod, interestCalculationPeriodMethod, repaymentEvery, repaymentPeriodFrequencyType,
-                numberOfRepayments, graceOnPrincipalPayment, graceOnInterestPayment, graceOnInterestCharged, amortizationMethod,
+                numberOfRepayments, graceOnPrincipalPayment, recurringGraceOnPrincipal, graceOnInterestPayment, graceOnInterestCharged, amortizationMethod,
                 inArrearsTolerance, graceOnArrearsAgeing, daysInMonthType, daysInYearType, isInterestRecalculationEnabled);
     }
 
@@ -133,7 +136,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
             final BigDecimal defaultAnnualNominalInterestRate, final InterestMethod interestMethod,
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final Integer repayEvery,
             final PeriodFrequencyType repaymentFrequencyType, final Integer defaultNumberOfRepayments,
-            final Integer graceOnPrincipalPayment, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
+            final Integer graceOnPrincipalPayment, boolean recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
             final AmortizationMethod amortizationMethod, final BigDecimal inArrearsTolerance, final Integer graceOnArrearsAgeing,
             final Integer daysInMonthType, final Integer daysInYearType, final boolean isInterestRecalculationEnabled) {
         this.currency = currency;
@@ -147,6 +150,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
         this.repaymentPeriodFrequencyType = repaymentFrequencyType;
         this.numberOfRepayments = defaultNumberOfRepayments;
         this.graceOnPrincipalPayment = defaultToNullIfZero(graceOnPrincipalPayment);
+        this.recurringGraceOnPrincipal = recurringGraceOnPrincipal;
         this.graceOnInterestPayment = defaultToNullIfZero(graceOnInterestPayment);
         this.graceOnInterestCharged = defaultToNullIfZero(graceOnInterestCharged);
         this.amortizationMethod = amortizationMethod;
@@ -196,6 +200,10 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
     @Override
     public Integer graceOnPrincipalPayment() {
         return this.graceOnPrincipalPayment;
+    }
+    
+    public boolean recurringGraceOnPrincipal(){
+    	return this.recurringGraceOnPrincipal;
     }
 
     @Override
@@ -397,6 +405,14 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
             actualChanges.put("locale", localeAsInput);
             this.graceOnPrincipalPayment = newValue;
         }
+        
+        final String recurringGraceOnPrincipalParamName = "recurringGraceOnPrincipal";
+        if (command.isChangeInBooleanParameterNamed(recurringGraceOnPrincipalParamName, this.recurringGraceOnPrincipal)) {
+            final boolean newValue = command.booleanPrimitiveValueOfParameterNamed(recurringGraceOnPrincipalParamName);
+            actualChanges.put(recurringGraceOnPrincipalParamName, newValue);
+            actualChanges.put("locale", localeAsInput);
+            this.recurringGraceOnPrincipal = newValue;
+        }
 
         final String graceOnInterestPaymentParamName = "graceOnInterestPayment";
         if (command.isChangeInIntegerParameterNamed(graceOnInterestPaymentParamName, this.graceOnInterestPayment)) {
@@ -518,6 +534,12 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
     public Integer getGraceOnPrincipalPayment() {
         return graceOnPrincipalPayment;
     }
+    
+    
+    public boolean getRecurringGraceOnPrincipal() {
+        return recurringGraceOnPrincipal;
+    }
+    
 
     public void setGraceOnPrincipalPayment(Integer graceOnPrincipalPayment) {
         this.graceOnPrincipalPayment = graceOnPrincipalPayment;
