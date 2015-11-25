@@ -478,7 +478,7 @@ public final class LoanApplicationTerms {
                                 interestForThisInstallment);
                     break;
                     case EQUAL_PRINCIPAL:
-                        principalForInstallment = calculateEqualPrincipalDueForInstallment(mc, periodNumber);
+                        principalForInstallment = calculateEqualPrincipalDueForInstallment(mc, periodNumber, outstandingBalance);
                     break;
                     case INVALID:
                     break;
@@ -740,7 +740,46 @@ public final class LoanApplicationTerms {
                 }
             break;
             case SAME_AS_REPAYMENT_PERIOD:
-                final BigDecimal loanTermFrequencyBigDecimal = BigDecimal.valueOf(this.repaymentEvery);
+            	 BigDecimal loanTermFrequencyBigDecimal = BigDecimal.valueOf(this.repaymentEvery);
+            	 BigDecimal actualLoanTermFrequencyBigDecimal = null;
+            	switch (this.repaymentPeriodFrequencyType) {
+                case INVALID:
+                break;
+                case DAYS:
+                    loanTermFrequencyBigDecimal = BigDecimal.valueOf(actualDays);
+                    //periodicInterestRate = oneDayOfYearInterestRate.multiply(loanTermFrequencyBigDecimal, mc);
+                break;
+                case WEEKS:
+                	loanTermFrequencyBigDecimal = BigDecimal.valueOf(actualDays);
+                break;
+                case ENDOFMONTH:
+                case MONTHS:
+                	
+                    //if (daysInMonthType.isDaysInMonth_30()) {
+                	loanTermFrequencyBigDecimal = BigDecimal.valueOf(actualDays).divide(BigDecimal.valueOf(30), RoundingMode.HALF_EVEN);
+                    	//loanTermFrequencyBigDecimal = actualLoanTermFrequencyBigDecimal.divide(loanTermFrequencyBigDecimal, RoundingMode.HALF_EVEN);
+                    //}
+                    //periodicInterestRate = oneDayOfYearInterestRate.multiply(BigDecimal.valueOf(numberOfDaysInPeriod), mc);
+                break;
+                case YEARS:
+                    switch (daysInYearType) {
+                        case DAYS_360:
+                        	actualLoanTermFrequencyBigDecimal = BigDecimal.valueOf(actualDays).divide(BigDecimal.valueOf(360), RoundingMode.HALF_EVEN);
+                        break;
+                        case DAYS_364:
+                        	actualLoanTermFrequencyBigDecimal = BigDecimal.valueOf(actualDays).divide(BigDecimal.valueOf(364), RoundingMode.HALF_EVEN);
+                        break;
+                        case DAYS_365:
+                        	actualLoanTermFrequencyBigDecimal = BigDecimal.valueOf(actualDays).divide(BigDecimal.valueOf(365), RoundingMode.HALF_EVEN);
+                        break;
+                        default:
+                        break;
+                    }
+                    loanTermFrequencyBigDecimal = actualLoanTermFrequencyBigDecimal.divide(loanTermFrequencyBigDecimal, RoundingMode.HALF_EVEN);
+                    //periodicInterestRate = oneDayOfYearInterestRate.multiply(BigDecimal.valueOf(numberOfDaysInPeriod), mc);
+                break;
+            }
+               
                 periodicInterestRate = this.annualNominalInterestRate.divide(loanTermPeriodsInYearBigDecimal, mc).divide(divisor, mc)
                         .multiply(loanTermFrequencyBigDecimal);
             break;
@@ -928,11 +967,15 @@ public final class LoanApplicationTerms {
         return this.interestChargedFromDate != null && interestCalculationGraceOnRepaymentPeriodFraction > Double.valueOf("0.0");
     }
 
-    private Money calculateEqualPrincipalDueForInstallment(final MathContext mc, final int periodNumber) {
+    private Money calculateEqualPrincipalDueForInstallment(final MathContext mc, final int periodNumber, Money outstandingBalances) {
 
         final Integer numberOfPrincipalPaymentPeriods = calculateNumberOfPrincipalPaymentPeriods(this.numberOfRepayments);
-
-        Money principal = this.principal.dividedBy(numberOfPrincipalPaymentPeriods, mc.getRoundingMode());
+        BigDecimal actualFixedEmiAmount = this.actualFixedEmiAmount;
+        Money principal = null;
+        if(actualFixedEmiAmount ==null)
+        	principal = this.principal.dividedBy(numberOfPrincipalPaymentPeriods, mc.getRoundingMode());
+        else
+        	principal = Money.of(outstandingBalances.getCurrency(), actualFixedEmiAmount);
         if (isPrincipalGraceApplicableForThisPeriod(periodNumber)) {
             principal = principal.zero();
         }

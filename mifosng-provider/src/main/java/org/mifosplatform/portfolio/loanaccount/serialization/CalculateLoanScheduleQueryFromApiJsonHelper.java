@@ -37,7 +37,7 @@ public final class CalculateLoanScheduleQueryFromApiJsonHelper {
             "accountNo", "externalId", "fundId", "loanOfficerId", "loanPurposeId", "transactionProcessingStrategyId", "principal",
             "inArrearsTolerance", "interestRatePerPeriod", "repaymentEvery", "numberOfRepayments", "loanTermFrequency",
             "loanTermFrequencyType", "repaymentFrequencyType", "amortizationType", "interestType", "interestCalculationPeriodType",  
-            "expectedDisbursementDate", "repaymentsStartingFromDate", "graceOnPrincipalPayment", "recurringGraceOnPrincipal", "graceOnInterestPayment",
+            "expectedDisbursementDate", "repaymentsStartingFromDate", "graceOnPrincipalPayment", "recurringGraceOnPrincipal", "graceOnInterestPayment", "interestRateFrequencyType",
             "graceOnInterestCharged", "interestChargedFromDate", "submittedOnDate", "submittedOnNote", "locale", "dateFormat", "charges",
             "collateral", "syncDisbursementWithMeeting", "linkAccountId", LoanApiConstants.disbursementDataParameterName,
             LoanApiConstants.emiAmountParameterName, LoanApiConstants.maxOutstandingBalanceParameterName,
