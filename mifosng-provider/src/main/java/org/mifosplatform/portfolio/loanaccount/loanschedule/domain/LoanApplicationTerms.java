@@ -724,13 +724,16 @@ public final class LoanApplicationTerms {
                     case YEARS:
                         switch (daysInYearType) {
                             case DAYS_360:
-                                numberOfDaysInPeriod = this.repaymentEvery * 360;
+                            	if(actualDays > 360)
+                            		numberOfDaysInPeriod = this.repaymentEvery * 360;
                             break;
                             case DAYS_364:
-                                numberOfDaysInPeriod = this.repaymentEvery * 364;
+                            	if(actualDays > 364)	
+                            		numberOfDaysInPeriod = this.repaymentEvery * 364;
                             break;
                             case DAYS_365:
-                                numberOfDaysInPeriod = this.repaymentEvery * 365;
+                            	if(actualDays > 365)
+                            		numberOfDaysInPeriod = this.repaymentEvery * 365;
                             break;
                             default:
                             break;
