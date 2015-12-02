@@ -131,7 +131,7 @@ public class LoanProductRelatedDetailTestHelper {
             final AmortizationMethod amortizationMethod, final BigDecimal inArrearsTolerance) {
 
         final Integer graceOnPrincipalPayment = Integer.valueOf(0);
-        final boolean recurringGraceOnPrincipal = Boolean.valueOf(false);
+        final Integer recurringGraceOnPrincipal = Integer.valueOf(0);
         final Integer graceOnInterestPayment = Integer.valueOf(0);
         final Integer graceOnInterestCharged = Integer.valueOf(0);
         final Integer graceOnArrearsAgeing = Integer.valueOf(0);

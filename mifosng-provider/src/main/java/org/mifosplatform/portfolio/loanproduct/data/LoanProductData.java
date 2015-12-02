@@ -76,7 +76,7 @@ public class LoanProductData {
     private final Long transactionProcessingStrategyId;
     private final String transactionProcessingStrategyName;
     private final Integer graceOnPrincipalPayment;
-    private final boolean recurringGraceOnPrincipal;
+    private final Integer recurringGraceOnPrincipal;
     private final Integer graceOnInterestPayment;
     private final Integer graceOnInterestCharged;
     private final Integer graceOnArrearsAgeing;
@@ -176,7 +176,7 @@ public class LoanProductData {
         final Long transactionProcessingStrategyId = null;
         final String transactionProcessingStrategyName = null;
         final Integer graceOnPrincipalPayment = null;
-        final boolean recurringGraceOnPrincipal = false;
+        final Integer recurringGraceOnPrincipal = null;
         final Integer graceOnInterestPayment = null;
         final Integer graceOnInterestCharged = null;
         final Integer graceOnArrearsAgeing = null;
@@ -248,7 +248,7 @@ public class LoanProductData {
         final Long transactionProcessingStrategyId = null;
         final String transactionProcessingStrategyName = null;
         final Integer graceOnPrincipalPayment = null;
-        final boolean recurringGraceOnPrincipal = false;
+        final Integer recurringGraceOnPrincipal = null;
         final Integer graceOnInterestPayment = null;
         final Integer graceOnInterestCharged = null;
         final Integer graceOnArrearsAgeing = null;
@@ -328,7 +328,7 @@ public class LoanProductData {
         final String transactionProcessingStrategyName = null;
 
         final Integer graceOnPrincipalPayment = null;
-        final boolean recurringGraceOnPrincipal = false;
+        final Integer recurringGraceOnPrincipal = null;
         final Integer graceOnInterestPayment = null;
         final Integer graceOnInterestCharged = null;
         final Integer graceOnArrearsAgeing = null;
@@ -398,7 +398,7 @@ public class LoanProductData {
             final EnumOptionData interestRateFrequencyType, final EnumOptionData amortizationType, final EnumOptionData interestType,
             final EnumOptionData interestCalculationPeriodType, final Long fundId, final String fundName,
             final Long transactionProcessingStrategyId, final String transactionProcessingStrategyName,
-            final Integer graceOnPrincipalPayment, final boolean recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
+            final Integer graceOnPrincipalPayment, final Integer recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
             final Collection<ChargeData> charges, final EnumOptionData accountingType, final boolean includeInBorrowerCycle,
             boolean useBorrowerCycle, final LocalDate startDate, final LocalDate closeDate, final String status, final String externalId,
             Collection<LoanProductBorrowerCycleVariationData> principalVariations,
@@ -712,7 +712,7 @@ public class LoanProductData {
         return this.graceOnPrincipalPayment;
     }
     
-    public boolean getRecurringGraceOnPrincipal(){
+    public Integer getRecurringGraceOnPrincipal(){
     	return this.recurringGraceOnPrincipal;
     }
 

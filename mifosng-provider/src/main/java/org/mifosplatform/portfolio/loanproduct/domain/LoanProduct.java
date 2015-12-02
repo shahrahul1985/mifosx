@@ -188,7 +188,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
 
         // grace details
         final Integer graceOnPrincipalPayment = command.integerValueOfParameterNamed("graceOnPrincipalPayment");
-        final boolean recurringGraceOnPrincipal = command.booleanPrimitiveValueOfParameterNamed("recurringGraceOnPrincipal");
+        final Integer recurringGraceOnPrincipal = command.integerValueOfParameterNamed("recurringGraceOnPrincipal");
         final Integer graceOnInterestPayment = command.integerValueOfParameterNamed("graceOnInterestPayment");
         final Integer graceOnInterestCharged = command.integerValueOfParameterNamed("graceOnInterestCharged");
         final Integer minimumDaysBetweenDisbursalAndFirstRepayment = command
@@ -486,7 +486,7 @@ public class LoanProduct extends AbstractPersistable<Long> {
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final Integer repayEvery,
             final PeriodFrequencyType repaymentFrequencyType, final Integer defaultNumberOfInstallments,
             final Integer defaultMinNumberOfInstallments, final Integer defaultMaxNumberOfInstallments,
-            final Integer graceOnPrincipalPayment, final boolean recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
+            final Integer graceOnPrincipalPayment, final Integer recurringGraceOnPrincipal, final Integer graceOnInterestPayment, final Integer graceOnInterestCharged,
             final AmortizationMethod amortizationMethod, final BigDecimal inArrearsTolerance, final List<Charge> charges,
             final AccountingRuleType accountingRuleType, final boolean includeInBorrowerCycle, final LocalDate startDate,
             final LocalDate closeDate, final String externalId, final boolean useBorrowerCycle,

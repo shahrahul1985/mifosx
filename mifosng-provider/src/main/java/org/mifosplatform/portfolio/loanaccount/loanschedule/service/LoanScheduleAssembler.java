@@ -225,7 +225,7 @@ public class LoanScheduleAssembler {
 
         // grace details
         final Integer graceOnPrincipalPayment = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("graceOnPrincipalPayment", element);
-        final boolean recurringGraceOnPrincipal = this.fromApiJsonHelper.extractBooleanNamed("recurringGraceOnPrincipal", element);
+        final Integer recurringGraceOnPrincipal = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("recurringGraceOnPrincipal", element);
         final Integer graceOnInterestPayment = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("graceOnInterestPayment", element);
         final Integer graceOnInterestCharged = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("graceOnInterestCharged", element);
         final LocalDate interestChargedFromDate = this.fromApiJsonHelper.extractLocalDateNamed("interestChargedFromDate", element);
