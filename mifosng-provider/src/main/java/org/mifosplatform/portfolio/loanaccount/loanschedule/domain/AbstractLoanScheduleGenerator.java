@@ -40,6 +40,7 @@ import org.mifosplatform.portfolio.loanaccount.loanschedule.exception.MultiDisbu
 import org.mifosplatform.portfolio.loanaccount.rescheduleloan.domain.LoanRescheduleModel;
 import org.mifosplatform.portfolio.loanaccount.rescheduleloan.domain.LoanRescheduleModelRepaymentPeriod;
 import org.mifosplatform.portfolio.loanaccount.rescheduleloan.domain.LoanRescheduleRequest;
+import org.mifosplatform.portfolio.loanproduct.domain.AmortizationMethod;
 import org.mifosplatform.portfolio.loanproduct.domain.LoanProductMinimumRepaymentScheduleRelatedDetail;
 
 /**
@@ -77,7 +78,7 @@ public abstract class AbstractLoanScheduleGenerator implements LoanScheduleGener
         Money principalDisbursed = loanApplicationTerms.getPrincipal();
         final MonetaryCurrency currency = principalDisbursed.getCurrency();
         final int numberOfRepayments = loanApplicationTerms.getNumberOfRepayments();
-
+        Money principalToBeScheduled = getPrincipalToBeScheduled(loanApplicationTerms) ;
         // variables for cumulative totals
         int loanTermInDays = Integer.valueOf(0);
         final BigDecimal totalPrincipalPaid = BigDecimal.ZERO;
@@ -112,7 +113,10 @@ public abstract class AbstractLoanScheduleGenerator implements LoanScheduleGener
         // Actual period Number and interest only repayments
         int instalmentNumber = 1;
 
-        Money outstandingBalance = principalDisbursed;
+        Money outstandingBalance = principalToBeScheduled;
+        
+
+        
         // disbursement map for tranche details(will added to outstanding
         // balance as per the start date)
         final Map<LocalDate, Money> disburseDetailMap = new HashMap<>();
@@ -125,6 +129,12 @@ public abstract class AbstractLoanScheduleGenerator implements LoanScheduleGener
             loanApplicationTerms.setPrincipal(loanApplicationTerms.getPrincipal().zero().plus(disburseAmt));
             outstandingBalance = outstandingBalance.zero().plus(disburseAmt);
         }
+        
+        //Set Fixed Principal Amount
+        if(loanApplicationTerms.getAmortizationMethod().equals(AmortizationMethod.EQUAL_PRINCIPAL)) {
+            loanApplicationTerms.updateFixedPrincipalAmount(mc, periodNumber, outstandingBalance) ;
+        }
+
 
         // charges which depends on total loan interest will be added to this
         // set and handled separately after all installments generated
@@ -231,6 +241,11 @@ public abstract class AbstractLoanScheduleGenerator implements LoanScheduleGener
                         outstandingBalance = outstandingBalance.plus(disburseDetail.getValue());
                         principalDisbursed = principalDisbursed.plus(disburseDetail.getValue());
                         loanApplicationTerms.setPrincipal(loanApplicationTerms.getPrincipal().plus(disburseDetail.getValue()));
+                        //Set Fixed Principal Amount
+                        if(loanApplicationTerms.getAmortizationMethod().equals(AmortizationMethod.EQUAL_PRINCIPAL)) {
+                            loanApplicationTerms.updateFixedPrincipalAmount(mc, periodNumber, outstandingBalance) ;
+                        }
+
                     }
                 }
             }
@@ -1801,4 +1816,26 @@ public abstract class AbstractLoanScheduleGenerator implements LoanScheduleGener
 
         return (value != null) ? value : 0;
     }
+    
+    
+    private Money calculateExpectedPrincipalPortion(final Money interestPortion, final LoanApplicationTerms applicationTerms) {
+        Money principalPortionCalculated = interestPortion.zero();
+        if (applicationTerms.getAmortizationMethod().isEqualInstallment()) {
+            principalPortionCalculated = principalPortionCalculated.plus(applicationTerms.getFixedEmiAmount()).minus(interestPortion);
+        } else {
+            principalPortionCalculated = principalPortionCalculated.plus(applicationTerms.getFixedPrincipalAmount());
+        }
+        return principalPortionCalculated;
+    }
+    
+    private Money getPrincipalToBeScheduled(final LoanApplicationTerms loanApplicationTerms) {
+        Money principalToBeScheduled;
+        if (loanApplicationTerms.isMultiDisburseLoan() && loanApplicationTerms.getApprovedPrincipal().isGreaterThanZero()) {
+            principalToBeScheduled = loanApplicationTerms.getApprovedPrincipal();
+        } else {
+            principalToBeScheduled = loanApplicationTerms.getPrincipal();
+        }
+        return principalToBeScheduled;
+    }
+    
 }

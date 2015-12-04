@@ -2409,7 +2409,7 @@ public class Loan extends AbstractPersistable<Long> {
                 this.maxOutstandingLoanBalance, loanVariationTermsData, getInterestChargedFromDate(),
                 this.loanProduct.getPrincipalThresholdForLastInstallment(), this.loanProduct.getInstallmentAmountInMultiplesOf(),
                 recalculationFrequencyType, restCalendarInstance, compoundingMethod, compoundingCalendarInstance, compoundingFrequencyType,
-                this.loanProduct.preCloseInterestCalculationStrategy(), rescheduleStrategyMethod);
+                this.loanProduct.preCloseInterestCalculationStrategy(), rescheduleStrategyMethod, getApprovedPrincipal());
 
         final LoanScheduleModel loanSchedule = loanScheduleGenerator.generate(mc, loanApplicationTerms, charges(),
                 scheduleGeneratorDTO.getHolidayDetailDTO());
@@ -4760,7 +4760,7 @@ public class Loan extends AbstractPersistable<Long> {
                 loanVariationTermsData, getInterestChargedFromDate(), this.loanInterestRecalculationDetails,
                 calendarInstanceForInterestRecalculation, recalculationFrequencyType, compoundingCalendarInstance,
                 compoundingFrequencyType, this.loanProduct.getPrincipalThresholdForLastInstallment(),
-                this.loanProduct.getInstallmentAmountInMultiplesOf(), this.loanProduct.preCloseInterestCalculationStrategy());
+                this.loanProduct.getInstallmentAmountInMultiplesOf(), this.loanProduct.preCloseInterestCalculationStrategy(), getApprovedPrincipal());
         return loanApplicationTerms;
     }
 
@@ -4819,7 +4819,7 @@ public class Loan extends AbstractPersistable<Long> {
                     disbursementData, this.maxOutstandingLoanBalance, loanVariationTermsData, getInterestChargedFromDate(),
                     this.loanProduct.getPrincipalThresholdForLastInstallment(), this.loanProduct.getInstallmentAmountInMultiplesOf(),
                     recalculationFrequencyType, restCalendarInstance, compoundingMethod, compoundingCalendarInstance,
-                    compoundingFrequencyType, this.loanProduct.preCloseInterestCalculationStrategy(), rescheduleStrategyMethod);
+                    compoundingFrequencyType, this.loanProduct.preCloseInterestCalculationStrategy(), rescheduleStrategyMethod, getApprovedPrincipal());
             final LoanRepaymentScheduleTransactionProcessor loanRepaymentScheduleTransactionProcessor = this.transactionProcessorFactory
                     .determineProcessor(this.transactionProcessingStrategy);
             installment = loanScheduleGenerator.calculatePrepaymentAmount(this.repaymentScheduleInstallments, getCurrency(), onDate,
@@ -5041,7 +5041,7 @@ public class Loan extends AbstractPersistable<Long> {
                 maxOutstandingBalance, loanVariationTermsData, interestChargedFromDate,
                 this.loanProduct.getPrincipalThresholdForLastInstallment(), this.loanProduct.getInstallmentAmountInMultiplesOf(),
                 recalculationFrequencyType, restCalendarInstance, compoundingMethod, compoundingCalendarInstance, compoundingFrequencyType,
-                this.loanProduct.preCloseInterestCalculationStrategy(), rescheduleStrategyMethod);
+                this.loanProduct.preCloseInterestCalculationStrategy(), rescheduleStrategyMethod, getApprovedPrincipal());
     }
 
     /**
