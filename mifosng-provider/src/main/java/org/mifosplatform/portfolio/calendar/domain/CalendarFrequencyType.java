@@ -14,7 +14,7 @@ import org.springframework.util.StringUtils;
 public enum CalendarFrequencyType {
 
     INVALID(0, "calendarFrequencyType.invalid"), DAILY(1, "calendarFrequencyType.daily"), WEEKLY(2, "calendarFrequencyType.weekly"), MONTHLY(
-            3, "calendarFrequencyType.monthly"), YEARLY(4, "calendarFrequencyType.yearly");
+            3, "calendarFrequencyType.monthly"), YEARLY(4, "calendarFrequencyType.yearly"),ENDOFMONTH(5, "calendarFrequencyType.endOfMonth");
 
     private final Integer value;
     private final String code;
@@ -60,6 +60,8 @@ public enum CalendarFrequencyType {
             frequency = CalendarFrequencyType.MONTHLY;
         } else if (frequencyString.equalsIgnoreCase(CalendarFrequencyType.YEARLY.toString())) {
             frequency = CalendarFrequencyType.YEARLY;
+        } else if (frequencyString.equalsIgnoreCase(CalendarFrequencyType.ENDOFMONTH.toString())) {
+            frequency = CalendarFrequencyType.ENDOFMONTH;
         }
 
         return frequency;
@@ -107,6 +109,8 @@ public enum CalendarFrequencyType {
                 return CalendarFrequencyType.MONTHLY;
             case YEARS:
                 return CalendarFrequencyType.YEARLY;
+            case ENDOFMONTH:
+            	return CalendarFrequencyType.MONTHLY;
             default:
                 return CalendarFrequencyType.INVALID;
         }
@@ -129,6 +133,8 @@ public enum CalendarFrequencyType {
                 return PeriodFrequencyType.MONTHS;
             case YEARLY:
                 return PeriodFrequencyType.YEARS;
+            case ENDOFMONTH:
+              return PeriodFrequencyType.ENDOFMONTH;    
             default:
                 return PeriodFrequencyType.INVALID;
         }

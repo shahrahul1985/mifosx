@@ -15,7 +15,8 @@ public enum RecalculationFrequencyType {
     SAME_AS_REPAYMENT_PERIOD(1, "interestRecalculationFrequencyType.same.as.repayment.period"), //
     DAILY(2, "interestRecalculationFrequencyType.daily"), //
     WEEKLY(3, "interestRecalculationFrequencyType.weekly"), //
-    MONTHLY(4, "interestRecalculationFrequencyType.monthly");
+    MONTHLY(4, "interestRecalculationFrequencyType.monthly"),
+    ENDOFMONTH(5, "interestRecalculationFrequencyType.endOfMonth");
 
     private final Integer value;
     private final String code;
@@ -62,6 +63,10 @@ public enum RecalculationFrequencyType {
         return this.value.equals(RecalculationFrequencyType.MONTHLY.getValue());
     }
 
+    public boolean isEndOFMonth() {
+        return this.value.equals(RecalculationFrequencyType.ENDOFMONTH.getValue());
+    }
+    
     public boolean isSameFrequency(final PeriodFrequencyType frequencyType) {
         boolean isSameFre = false;
         switch (this) {
@@ -73,6 +78,9 @@ public enum RecalculationFrequencyType {
             break;
             case WEEKLY:
                 isSameFre = frequencyType.isWeekly();
+            break;
+            case ENDOFMONTH:
+            	isSameFre = frequencyType.isEndOfMonth();
             break;
             default:
             break;

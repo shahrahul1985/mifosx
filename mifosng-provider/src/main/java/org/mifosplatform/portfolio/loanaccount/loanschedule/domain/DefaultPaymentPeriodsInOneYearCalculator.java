@@ -23,6 +23,7 @@ public class DefaultPaymentPeriodsInOneYearCalculator implements PaymentPeriodsI
             case WEEKS:
                 paymentPeriodsInOneYear = Integer.valueOf(52);
             break;
+            case ENDOFMONTH:
             case MONTHS:
                 paymentPeriodsInOneYear = Integer.valueOf(12);
             break;
@@ -72,6 +73,7 @@ public class DefaultPaymentPeriodsInOneYearCalculator implements PaymentPeriodsI
             case MONTHS:
                 fraction = numberOfDaysInterestCalculationGrace.doubleValue() / (Double.valueOf("30.0") * every.doubleValue());
             break;
+            case ENDOFMONTH:
             case YEARS:
                 fraction = numberOfDaysInterestCalculationGrace.doubleValue() / (Double.valueOf("365.0") * every.doubleValue());
             break;
