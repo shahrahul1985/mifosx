@@ -69,6 +69,7 @@ public final class LoanApplicationTerms {
      * loans repayment period (installment).
      */
     private Integer principalGrace;
+    private boolean recurringGraceOnPrincipal;
 
     /**
      * Integer representing the number of 'repayment frequencies' or
@@ -162,6 +163,7 @@ public final class LoanApplicationTerms {
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final Money principalMoney,
             final LocalDate expectedDisbursementDate, final LocalDate repaymentsStartingFromDate,
             final LocalDate calculatedRepaymentsStartingFromDate, final Integer graceOnPrincipalPayment,
+            final boolean recurringGraceOnPrincipal,
             final Integer graceOnInterestPayment, final Integer graceOnInterestCharged, final LocalDate interestChargedFromDate,
             final Money inArrearsTolerance, final boolean multiDisburseLoan, final BigDecimal emiAmount,
             final List<DisbursementData> disbursementDatas, final BigDecimal maxOutstandingBalance,
@@ -178,7 +180,7 @@ public final class LoanApplicationTerms {
         return new LoanApplicationTerms(currency, loanTermFrequency, loanTermPeriodFrequencyType, numberOfRepayments, repaymentEvery,
                 repaymentPeriodFrequencyType, nthDay, weekDayType, amortizationMethod, interestMethod, interestRatePerPeriod,
                 interestRatePeriodFrequencyType, annualNominalInterestRate, interestCalculationPeriodMethod, principalMoney,
-                expectedDisbursementDate, repaymentsStartingFromDate, calculatedRepaymentsStartingFromDate, graceOnPrincipalPayment,
+                expectedDisbursementDate, repaymentsStartingFromDate, calculatedRepaymentsStartingFromDate, graceOnPrincipalPayment, recurringGraceOnPrincipal,
                 graceOnInterestPayment, graceOnInterestCharged, interestChargedFromDate, inArrearsTolerance, multiDisburseLoan, emiAmount,
                 disbursementDatas, maxOutstandingBalance, emiAmountVariations, graceOnArrearsAgeing, daysInMonthType, daysInYearType,
                 isInterestRecalculationEnabled, rescheduleStrategyMethod, interestRecalculationCompoundingMethod, restCalendarInstance,
@@ -239,6 +241,7 @@ public final class LoanApplicationTerms {
 
         //
         final Integer graceOnPrincipalPayment = loanProductRelatedDetail.graceOnPrincipalPayment();
+        final boolean recurringGraceOnPrincipal = loanProductRelatedDetail.recurringGraceOnPrincipal();
         final Integer graceOnInterestPayment = loanProductRelatedDetail.graceOnInterestPayment();
         final Integer graceOnInterestCharged = loanProductRelatedDetail.graceOnInterestCharged();
 
@@ -250,7 +253,7 @@ public final class LoanApplicationTerms {
                 repaymentEvery, repaymentPeriodFrequencyType, nthDay.getValue(), dayOfWeek, amortizationMethod, interestMethod,
                 interestRatePerPeriod, interestRatePeriodFrequencyType, annualNominalInterestRate, interestCalculationPeriodMethod,
                 principalMoney, expectedDisbursementDate, repaymentsStartingFromDate, calculatedRepaymentsStartingFromDate,
-                graceOnPrincipalPayment, graceOnInterestPayment, graceOnInterestCharged, interestChargedFromDate, inArrearsTolerance,
+                graceOnPrincipalPayment, recurringGraceOnPrincipal, graceOnInterestPayment, graceOnInterestCharged, interestChargedFromDate, inArrearsTolerance,
                 multiDisburseLoan, emiAmount, disbursementDatas, maxOutstandingBalance, emiAmountVariations,
                 loanProductRelatedDetail.getGraceOnDueDate(), daysInMonthType, daysInYearType, isInterestRecalculationEnabled,
                 rescheduleStrategyMethod, compoundingMethod, restCalendarInstance, recalculationFrequencyType, compoundingCalendarInstance,
@@ -284,6 +287,7 @@ public final class LoanApplicationTerms {
 
         //
         final Integer graceOnPrincipalPayment = loanProductRelatedDetail.graceOnPrincipalPayment();
+        final boolean recurringGraceOnPrincipal = loanProductRelatedDetail.recurringGraceOnPrincipal();
         final Integer graceOnInterestPayment = loanProductRelatedDetail.graceOnInterestPayment();
         final Integer graceOnInterestCharged = loanProductRelatedDetail.graceOnInterestCharged();
 
@@ -301,7 +305,8 @@ public final class LoanApplicationTerms {
         return new LoanApplicationTerms(applicationCurrency, loanTermFrequency, loanTermPeriodFrequencyType, numberOfRepayments,
                 repaymentEvery, repaymentPeriodFrequencyType, null, null, amortizationMethod, interestMethod, interestRatePerPeriod,
                 interestRatePeriodFrequencyType, annualNominalInterestRate, interestCalculationPeriodMethod, principalMoney,
-                expectedDisbursementDate, repaymentsStartingFromDate, calculatedRepaymentsStartingFromDate, graceOnPrincipalPayment,
+                expectedDisbursementDate, repaymentsStartingFromDate, calculatedRepaymentsStartingFromDate, graceOnPrincipalPayment, 
+                recurringGraceOnPrincipal, 
                 graceOnInterestPayment, graceOnInterestCharged, interestChargedFromDate, inArrearsTolerance, multiDisburseLoan, emiAmount,
                 disbursementDatas, maxOutstandingBalance, emiAmountVariations, loanProductRelatedDetail.getGraceOnDueDate(),
                 daysInMonthType, daysInYearType, isInterestRecalculationEnabled, rescheduleStrategyMethod,
@@ -317,7 +322,7 @@ public final class LoanApplicationTerms {
             final PeriodFrequencyType interestRatePeriodFrequencyType, final BigDecimal annualNominalInterestRate,
             final InterestCalculationPeriodMethod interestCalculationPeriodMethod, final Money principal,
             final LocalDate expectedDisbursementDate, final LocalDate repaymentsStartingFromDate,
-            final LocalDate calculatedRepaymentsStartingFromDate, final Integer principalGrace, final Integer interestPaymentGrace,
+            final LocalDate calculatedRepaymentsStartingFromDate, final Integer principalGrace,boolean recurringGraceOnPrincipal,final Integer interestPaymentGrace,
             final Integer interestChargingGrace, final LocalDate interestChargedFromDate, final Money inArrearsTolerance,
             final boolean multiDisburseLoan, final BigDecimal emiAmount, final List<DisbursementData> disbursementDatas,
             final BigDecimal maxOutstandingBalance, final List<LoanTermVariationsData> emiAmountVariations,
@@ -351,6 +356,7 @@ public final class LoanApplicationTerms {
         this.calculatedRepaymentsStartingFromDate = calculatedRepaymentsStartingFromDate;
 
         this.principalGrace = principalGrace;
+        this.recurringGraceOnPrincipal = recurringGraceOnPrincipal;
         this.interestPaymentGrace = interestPaymentGrace;
         this.interestChargingGrace = interestChargingGrace;
         this.interestChargedFromDate = interestChargedFromDate;
@@ -802,7 +808,10 @@ public final class LoanApplicationTerms {
     }
 
     private int calculateNumberOfRepaymentsWithPrincipalPayment() {
-        return this.numberOfRepayments - getPrincipalGrace();
+    	if(this.recurringGraceOnPrincipal){
+     		return this.numberOfRepayments/(getPrincipalGrace() + 1);
+    	}
+    	return this.numberOfRepayments - getPrincipalGrace();
     }
 
     private Integer calculateNumberOfRepaymentPeriodsWhereInterestPaymentIsDue(final Integer totalNumberOfRepaymentPeriods) {
@@ -810,11 +819,20 @@ public final class LoanApplicationTerms {
     }
 
     private Integer calculateNumberOfPrincipalPaymentPeriods(final Integer totalNumberOfRepaymentPeriods) {
-        return totalNumberOfRepaymentPeriods - getPrincipalGrace();
+      
+    	if(this.recurringGraceOnPrincipal){
+      		return this.numberOfRepayments/(getPrincipalGrace() + 1);
+       	}
+    	return totalNumberOfRepaymentPeriods - getPrincipalGrace();
     }
 
     public boolean isPrincipalGraceApplicableForThisPeriod(final int periodNumber) {
-        return periodNumber > 0 && periodNumber <= getPrincipalGrace();
+      
+    	if(this.recurringGraceOnPrincipal){
+    		return periodNumber > 0 && (periodNumber%(getPrincipalGrace() +1)) >0;
+       	}
+    	
+    	return periodNumber > 0 && periodNumber <= getPrincipalGrace();
     }
 
     private boolean isInterestPaymentGraceApplicableForThisPeriod(final int periodNumber) {
@@ -859,11 +877,23 @@ public final class LoanApplicationTerms {
             final double futureValue = 0;
             final double principalDouble = balance.getAmount().multiply(BigDecimal.valueOf(-1)).doubleValue();
 
-            final Integer periodsRemaining = this.numberOfRepayments - periodsElapsed;
-
-            double installmentAmount = FinanicalFunctions.pmt(periodicInterestRate.doubleValue(), periodsRemaining.doubleValue(),
-                    principalDouble, futureValue, false);
-
+            Integer periodsRemaining = this.numberOfRepayments - periodsElapsed;
+                        //As the Grace for Principal is taken into consideration for Recurring Moratorium the period for interest calculation will remain the same
+                        Integer interestPeriodsRemaining = periodsRemaining;
+                        
+                        int getPrincipalGrace = getPrincipalGrace();
+                        
+                        if(getPrincipalGrace >0 && this.recurringGraceOnPrincipal ){
+                        	if( periodsElapsed%getPrincipalGrace >0){
+                        		periodsRemaining = periodsRemaining / (getPrincipalGrace+1);
+                        	} else {
+                        		periodsRemaining = (periodsRemaining + (periodsElapsed%getPrincipalGrace))/ (getPrincipalGrace+1);
+                        	}
+                        	interestPeriodsRemaining = periodsRemaining + 1;
+                        } 
+           
+            double installmentAmount = FinanicalFunctions.pmt(periodicInterestRate.doubleValue(), interestPeriodsRemaining.doubleValue(),
+                                principalDouble, futureValue, false);
             if (this.installmentAmountInMultiplesOf != null) {
                 installmentAmount = Money.roundToMultiplesOf(installmentAmount, this.installmentAmountInMultiplesOf);
             }
@@ -967,7 +997,7 @@ public final class LoanApplicationTerms {
         return LoanProductRelatedDetail.createFrom(currency, this.principal.getAmount(), this.interestRatePerPeriod,
                 this.interestRatePeriodFrequencyType, this.annualNominalInterestRate, this.interestMethod,
                 this.interestCalculationPeriodMethod, this.repaymentEvery, this.repaymentPeriodFrequencyType, this.numberOfRepayments,
-                this.principalGrace, this.interestPaymentGrace, this.interestChargingGrace, this.amortizationMethod,
+                this.principalGrace, this.recurringGraceOnPrincipal, this.interestPaymentGrace, this.interestChargingGrace, this.amortizationMethod,
                 this.inArrearsTolerance.getAmount(), this.graceOnArrearsAgeing, this.daysInMonthType.getValue(),
                 this.daysInYearType.getValue(), this.interestRecalculationEnabled);
     }
