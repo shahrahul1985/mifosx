@@ -101,7 +101,7 @@ public class LoanAccountData {
     private final Long transactionProcessingStrategyId;
     private final String transactionProcessingStrategyName;
     private final Integer graceOnPrincipalPayment;
-    private final boolean recurringGraceOnPrincipal;
+    private final Integer recurringGraceOnPrincipal;
     private final Integer graceOnInterestPayment;
     private final Integer graceOnInterestCharged;
     private final Integer graceOnArrearsAgeing;
@@ -238,7 +238,7 @@ public class LoanAccountData {
         final EnumOptionData interestCalculationPeriodType = null;
         final LocalDate expectedFirstRepaymentOnDate = null;
         final Integer graceOnPrincipalPayment = null;
-        final boolean recurringGraceOnPrincipal = false;
+        final Integer recurringGraceOnPrincipal = null;
         final Integer graceOnInterestPayment = null;
         final Integer graceOnInterestCharged = null;
         final Integer graceOnArrearsAgeing = null;
@@ -364,7 +364,7 @@ public class LoanAccountData {
         final EnumOptionData interestCalculationPeriodType = null;
         final LocalDate expectedFirstRepaymentOnDate = null;
         final Integer graceOnPrincipalPayment = null;
-        final boolean recurringGraceOnPrincipal = false;
+        final Integer recurringGraceOnPrincipal = null;
         final Integer graceOnInterestPayment = null;
         final Integer graceOnArrearsAgeing = null;
         final Integer graceOnInterestCharged = null;
@@ -518,7 +518,7 @@ public class LoanAccountData {
         final EnumOptionData interestCalculationPeriodType = null;
         final LocalDate expectedFirstRepaymentOnDate = null;
         final Integer graceOnPrincipalPayment = null;
-        final boolean recurringGraceOnPrincipal = false;
+        final Integer recurringGraceOnPrincipal = null;
         final Integer graceOnInterestPayment = null;
         final Integer graceOnInterestCharged = null;
         final Integer graceOnArrearsAgeing = null;
@@ -841,7 +841,7 @@ public class LoanAccountData {
             final EnumOptionData amortizationType, final BigDecimal interestRatePerPeriod, final EnumOptionData interestRateFrequencyType,
             final BigDecimal annualInterestRate, final EnumOptionData interestType, final boolean isFloatingInterestRate, 
             final BigDecimal interestRateDifferential, final EnumOptionData interestCalculationPeriodType,
-            final LocalDate expectedFirstRepaymentOnDate, final Integer graceOnPrincipalPayment,final boolean recurringGraceOnPrincipal,
+            final LocalDate expectedFirstRepaymentOnDate, final Integer graceOnPrincipalPayment,final Integer recurringGraceOnPrincipal,
             final Integer graceOnInterestPayment,
             final Integer graceOnInterestCharged, final LocalDate interestChargedFromDate, final LoanApplicationTimelineData timeline,
             final LoanSummaryData loanSummary, final BigDecimal feeChargesDueAtDisbursementCharged,
@@ -1147,7 +1147,7 @@ public class LoanAccountData {
             final BigDecimal annualInterestRate, final EnumOptionData interestType, final boolean isFloatingInterestRate,
             final BigDecimal interestRateDifferential, final EnumOptionData interestCalculationPeriodType,
             final LocalDate expectedFirstRepaymentOnDate, final Integer graceOnPrincipalPayment,
-            final boolean recurringGraceOnPrincipal,
+            final Integer recurringGraceOnPrincipal,
             final Integer graceOnInterestPayment,
             final Integer graceOnInterestCharged, final LocalDate interestChargedFromDate, final LoanApplicationTimelineData timeline,
             final LoanSummaryData summary, final BigDecimal feeChargesDueAtDisbursementCharged, final LoanScheduleData repaymentSchedule,
