@@ -82,7 +82,7 @@ public class LoanProductRelatedDetail implements LoanProductMinimumRepaymentSche
     @Column(name = "grace_on_principal_periods", nullable = true)
     private Integer graceOnPrincipalPayment;
     
-    @Column(name = "is_grace_on_principal_recurring", nullable = false)
+    @Column(name = "recurring_grace_on_principal_periods", nullable = false)
     private Integer recurringGraceOnPrincipal;
 
     @Column(name = "grace_on_interest_periods", nullable = true)
