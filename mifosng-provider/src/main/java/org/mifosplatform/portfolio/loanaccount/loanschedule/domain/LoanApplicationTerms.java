@@ -1011,7 +1011,10 @@ public final class LoanApplicationTerms {
     public void updateFixedPrincipalAmount(final MathContext mc, final int periodNumber, final Money outstandingAmount) {
         final Integer numberOfPrincipalPaymentPeriods = calculateNumberOfPrincipalPaymentPeriods(this.numberOfRepayments);
         Money principal = outstandingAmount.dividedBy(numberOfPrincipalPaymentPeriods - periodNumber + 1, mc.getRoundingMode());
-        this.fixedPrincipalAmount = principal.getAmount();
+        if(this.actualFixedEmiAmount != null){
+        	this.fixedPrincipalAmount = this.actualFixedEmiAmount;
+        } else 
+        	this.fixedPrincipalAmount = principal.getAmount();
     }
     
     private Money calculatePrincipalDueForInstallment(final int periodNumber, final Money totalDuePerInstallment, final Money periodInterest) {

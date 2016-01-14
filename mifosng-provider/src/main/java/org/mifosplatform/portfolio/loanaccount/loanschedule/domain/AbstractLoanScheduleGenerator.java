@@ -1160,9 +1160,11 @@ public abstract class AbstractLoanScheduleGenerator implements LoanScheduleGener
         LocalDate applicableDate = getNextRestScheduleDate(detail.getTransactionDate().minusDays(1), loanApplicationTerms, holidayDetailDTO);
         updateMapWithAmount(principalPortionMap, unprocessed, applicableDate);
         installment.addPrincipalAmount(unprocessed);
-        LoanRepaymentScheduleInstallment lastInstallment = installments.get(installments.size() - 1);
-        lastInstallment.updatePrincipal(lastInstallment.getPrincipal(unprocessed.getCurrency()).plus(unprocessed).getAmount());
-        lastInstallment.payPrincipalComponent(detail.getTransactionDate(), unprocessed);
+        if(installments.size() > 1){
+        	LoanRepaymentScheduleInstallment lastInstallment = installments.get(installments.size() - 1);
+        	lastInstallment.updatePrincipal(lastInstallment.getPrincipal(unprocessed.getCurrency()).plus(unprocessed).getAmount());
+        	lastInstallment.payPrincipalComponent(detail.getTransactionDate(), unprocessed);
+        }
     }
 
     /**
