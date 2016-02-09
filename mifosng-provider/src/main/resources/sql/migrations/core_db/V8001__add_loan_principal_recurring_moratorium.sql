@@ -1,12 +1,33 @@
 
-  ALTER TABLE m_loan
-  ADD COLUMN `recurring_grace_on_principal_periods` SMALLINT(5) NULL AFTER `grace_on_principal_periods` ;
- 
-  ALTER TABLE m_product_loan
-  ADD COLUMN `recurring_grace_on_principal_periods` SMALLINT(5) NULL AFTER `grace_on_principal_periods` ; 
- 
- 
- 
-  update m_product_loan set recurring_grace_on_principal_periods = grace_on_principal_periods where is_grace_on_principal_recurring = 1;
+SET @s = (SELECT IF(
+    (SELECT COUNT(*)
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE table_name = 'm_loan'
+        AND table_schema = DATABASE()
+        AND column_name = 'recurring_grace_on_principal_periods'
+    ) > 0,
+    "SELECT 1",
+    "ALTER TABLE m_loan ADD recurring_grace_on_principal_periods SMALLINT(5) NULL AFTER `grace_on_principal_periods`"
+));
 
-  update m_loan set recurring_grace_on_principal_periods = grace_on_principal_periods where is_grace_on_principal_recurring = 1; 
+PREPARE stmt FROM @s;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @s = (SELECT IF(
+    (SELECT COUNT(*)
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE table_name = 'm_product_loan'
+        AND table_schema = DATABASE()
+        AND column_name = 'recurring_grace_on_principal_periods'
+    ) > 0,
+    "SELECT 1",
+    "ALTER TABLE m_product_loan ADD recurring_grace_on_principal_periods SMALLINT(5) NULL AFTER `grace_on_principal_periods`"
+));
+
+PREPARE stmt FROM @s;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+  
+  
+ 
